@@ -1,4 +1,4 @@
-# Todo-App
+# Django Todo-App
 
 #### Classical todo app
 
