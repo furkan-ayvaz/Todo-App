@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <br>
+        <h1 style="margin-left : 150px;">Main Page</h1>
+        <br><br><br>
+        {% if request.user.is_authenticated %}
+        <h3>Welcome <i>{{ request.user.username }}</i></h3>
+        {% else %}
+        <h3>
+            <a href="{% url 'user:login' %}">Sign in</a> if you have an account, or 
+            <a href="{% url 'user:register' %}">sign up</a>.
+        </h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+    <h3>Welcome {{request.user.username}}</h3>
+    <br><br>
+    {% if todos %}
+    <table class="table">
+        <thead style="color :red;">
+            <tr>
+                <th>id</th>
+                <th>Describe</th>
+                <th>Case</th>
+                <th>Created Date</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+            <tr>
+                <td><b>{{todo.id}}</b></td>
+                <td><b>{{todo.todo_describe}}</b></td>
+                {% if todo.todo_case == True %}
+                <td><b>Done</b></td>
+                {% else %}
+                <td><b>Undone</b></td>
+                {% endif %}
+                <td><b>{{todo.created_date}}</b></td>
+                <td><a style="color:green;" href="{% url 'todo:update' todo.id %}"><i
+                            class="far fa-check-circle fa-2x"></i></a></td>
+                <td><a style="color:red;" href="{% url 'todo:delete' todo.id %}"><i
+                            class="far fa-trash-alt fa-2x"></i></a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-danger">You don't have any todo.</div>
+            {% endif %}
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="{% url 'todo:add' %}">Add</a>
+</div>
+
+{% endblock body %}
