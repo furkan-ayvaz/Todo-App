@@ -28,18 +28,17 @@ def todoAdd(request):
 @login_required(login_url="user:login")
 def todoUpdate(request,id):
     todo = get_object_or_404(TODO,id = id)
-    todo_describe = todo.todo_describe
-    todo_case = todo.todo_case
-    todo.delete()
-    if todo_case == True:
-        todo_case = False
+    print(todo.todo_case)
+    if todo.todo_case == "True":
+        todo.todo_case = "False"
+        todo.save(update_fields=["todo_case"])
     else:
-        todo_case = True
-    newTodo = TODO(id = id,todo_describe = todo_describe,todo_case=todo_case)
-    newTodo.inserted_by = request.user
-    newTodo.save()
+        todo.todo_case = "True"
+        todo.save(update_fields=["todo_case"])
     messages.success(request,"Todo update successfully ...")
     return redirect("todo:dashboard")
+
+
 
 @login_required(login_url="user:login")
 def todoDelete(request,id):
