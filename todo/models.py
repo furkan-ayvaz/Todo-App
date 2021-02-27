@@ -16,5 +16,3 @@ class TODO(models.Model):
         return self.todo_describe
 
     
-
-
